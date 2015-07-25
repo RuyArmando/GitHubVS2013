@@ -14,8 +14,8 @@ namespace blog.Mapeamentos
         {
             Table("posts");
             Id(post => post.Id).GeneratedBy.Identity();
-            Map(post => post.Titulo);
-            Map(post => post.Conteudo);
+            Map(post => post.Titulo).Index("idx_titulo");
+            Map(post => post.Conteudo).Not.Nullable();
             Map(post => post.DataPublicacao);
             Map(post => post.Publicado);
         }

@@ -14,39 +14,39 @@ namespace blog
     {
         static void Main(string[] args)
         {
-            //Post post = new Post()
-            //{
-            //    Id = 2,
-            //    Titulo="Meu primeiro post 12",
-            //    Conteudo="Conteudo do post 12",
-            //    DataPublicacao = DateTime.Now,
-            //    Publicado = true
-            //};
-
-            //PostDAO dao = new PostDAO();
-            //dao.Atualiza(post);
-
-            //IList<Post> posts = dao.BuscaPorId(2);
-
-            //foreach (var pst in posts)
-            //{
-            //    Console.WriteLine(pst.Titulo);
-            //}
-
-            using (ISession session = NHibernateHelper.AbreSession())
+            Post post = new Post()
             {
-                Post post = new Post()
-                {
-                    Titulo="Meu primeiro post NHibernate",
-                    Conteudo = "Conteudo do post NHibernate",
-                    DataPublicacao = null,
-                    Publicado = true
-                };
+                Id = 2,
+                Titulo = "Meu primeiro post 12",
+                Conteudo = "Conteudo do post 12",
+                DataPublicacao = DateTime.Now,
+                Publicado = true
+            };
 
-                ITransaction tx = session.BeginTransaction();
-                session.Save(post);
-                tx.Commit();
+            PostDAO dao = new PostDAO();
+            dao.Atualiza(post);
+            Console.WriteLine("Atualizei: " + post.Id);
+
+            post.Id = 0;
+            dao.Adiciona(post);
+            Console.WriteLine("Adicionei: " + post.Id);
+
+            IList<Post> posts = dao.Lista();
+
+            foreach (var pst in posts)
+            {
+                Console.WriteLine("encontrei: " + pst.Id + " - " + pst.Titulo);
             }
+
+            Post p = dao.BuscaPorId(post.Id);
+
+            if (p != null)
+            {
+                Console.WriteLine("removi: " + p.Id);
+                dao.Remove(p);
+            }
+
+            Console.ReadKey();
 
         }
     }
