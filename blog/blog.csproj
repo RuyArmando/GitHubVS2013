@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="DAL\ConnectionFactory.cs" />
     <Compile Include="DAL\PostDAO.cs" />
+    <Compile Include="Infra\NHibernateHelper.cs" />
     <Compile Include="Mapeamentos\PostMapping.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Program.cs" />

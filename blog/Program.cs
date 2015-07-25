@@ -1,4 +1,5 @@
 ﻿using blog.DAL;
+using blog.Infra;
 using blog.Models;
 using FluentNHibernate.Cfg;
 using NHibernate;
@@ -32,16 +33,7 @@ namespace blog
             //    Console.WriteLine(pst.Titulo);
             //}
 
-            Configuration cfg = new Configuration();
-            cfg.Configure();
-
-            ISessionFactory factory = Fluently.Configure(cfg)
-                .Mappings(x =>
-                {
-                    x.FluentMappings.AddFromAssembly(Assembly.GetExecutingAssembly());
-                }).BuildSessionFactory();
-
-            using (ISession session = factory.OpenSession())
+            using (ISession session = NHibernateHelper.AbreSession())
             {
                 Post post = new Post()
                 {
